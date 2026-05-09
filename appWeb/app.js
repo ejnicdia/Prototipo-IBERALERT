@@ -30,7 +30,7 @@ const translations = {
         nav_contact: "Contacto",
         nav_privacy: "Política de Privacidad",
         search_placeholder: "Buscar ubicaciones...",
-        title_dashboard: "Incidencias Recientes (Suscripciones)",
+        title_dashboard: "Incidencias Recientes",
         title_search: "Resultados de Búsqueda",
         title_subs: "Mis Zonas Suscritas",
         subtitle_loc_incidents: "Incidencias en esta ubicación",
@@ -118,7 +118,7 @@ const translations = {
         nav_contact: "Contacte",
         nav_privacy: "Política de Privadesa",
         search_placeholder: "Cercar ubicacions...",
-        title_dashboard: "Incidències Recents (Subscripcions)",
+        title_dashboard: "Incidències Recents",
         title_search: "Resultats de Cerca",
         title_subs: "Les meves Zones Subscrites",
         subtitle_loc_incidents: "Incidències en aquesta ubicació",
@@ -206,7 +206,7 @@ const translations = {
         nav_contact: "Kontaktua",
         nav_privacy: "Pribatutasun Politika",
         search_placeholder: "Bilatu kokapenak...",
-        title_dashboard: "Azken Gorabeherak (Harpidetzak)",
+        title_dashboard: "Azken Gorabeherak",
         title_search: "Bilaketaren Emaitzak",
         title_subs: "Nire Harpidetutako Eremuak",
         subtitle_loc_incidents: "Gorabeherak kokapen honetan",
@@ -294,7 +294,7 @@ const translations = {
         nav_contact: "Contacto",
         nav_privacy: "Política de Privacidade",
         search_placeholder: "Buscar localizacións...",
-        title_dashboard: "Incidencias Recentes (Subscricións)",
+        title_dashboard: "Incidencias Recentes",
         title_search: "Resultados da Busca",
         title_subs: "As miñas Zonas Subscritas",
         subtitle_loc_incidents: "Incidencias nesta localización",
@@ -406,9 +406,9 @@ const app = {
     init() {
         this.setupSearch();
         this.populateSelects();
-        
+
         const lastConn = document.getElementById('last-conn-date');
-        if(lastConn) lastConn.value = state.controlPanel.lastConnection;
+        if (lastConn) lastConn.value = state.controlPanel.lastConnection;
 
         this.changeLanguage('es');
         this.navigate('view-login');
@@ -427,7 +427,7 @@ const app = {
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             el.setAttribute('placeholder', this.t(el.getAttribute('data-i18n-placeholder')));
         });
-        
+
         if (this.currentView) {
             this.renderView(this.currentView, this.currentParams || {});
             this.updateNav(this.currentView);
@@ -468,12 +468,12 @@ const app = {
 
     applyRBAC() {
         const isAdmin = this.currentUser.role === 'autoridad';
-        
+
         const adminLinks = document.querySelector('.admin-only');
         if (adminLinks) {
             adminLinks.style.display = isAdmin ? 'block' : 'none';
         }
-        
+
         const adminBottomNav = document.querySelector('.admin-only-flex');
         if (adminBottomNav) {
             adminBottomNav.style.display = isAdmin ? 'flex' : 'none';
@@ -483,7 +483,7 @@ const app = {
     navigate(viewId, params = {}, replaceHistory = false) {
         if (this.currentUser && this.currentUser.role === 'usuario') {
             if (viewId === 'view-report-list' || viewId === 'view-report-form' || viewId === 'view-report-detail' ||
-                viewId === 'view-incident-list' || viewId === 'view-incident-form' || 
+                viewId === 'view-incident-list' || viewId === 'view-incident-form' ||
                 viewId === 'view-control-panel') {
                 alert("Acceso denegado. Se requieren permisos de Autoridad.");
                 return;
@@ -493,7 +493,7 @@ const app = {
         document.getElementById('sidebar').classList.remove('open');
 
         if (this.currentView && !replaceHistory) {
-            this.history.push({view: this.currentView, params: this.currentParams || {}});
+            this.history.push({ view: this.currentView, params: this.currentParams || {} });
         } else if (replaceHistory) {
             this.history = [];
         }
@@ -528,7 +528,7 @@ const app = {
     updateNav(viewId) {
         const bottomItems = document.querySelectorAll('#bottom-nav .nav-item');
         bottomItems.forEach(item => item.classList.remove('active'));
-        
+
         if (viewId === 'view-subscriptions' && bottomItems[0]) bottomItems[0].classList.add('active');
         if (viewId === 'view-dashboard' && bottomItems[1]) bottomItems[1].classList.add('active');
         if (viewId === 'view-incident-form' && bottomItems[2]) bottomItems[2].classList.add('active');
@@ -555,10 +555,10 @@ const app = {
     renderDashboard() {
         const container = document.getElementById('dashboard-cards');
         container.innerHTML = '';
-        
+
         const mySubs = this.currentUser.subscriptions;
         const activeIncidents = state.incidencias.filter(i => i.estado === 'Activa' && mySubs.includes(i.ciudad));
-        
+
         if (activeIncidents.length === 0) {
             container.innerHTML = '<p>No hay incidencias activas en tus zonas suscritas.</p>';
             return;
@@ -633,9 +633,9 @@ const app = {
     renderSearchResults(query) {
         const container = document.getElementById('search-results');
         container.innerHTML = '';
-        
+
         const filtered = state.ciudades.filter(c => c.toLowerCase().includes(query));
-        
+
         if (filtered.length === 0) {
             container.innerHTML = '<p style="padding: 15px 0;">No se encontraron ubicaciones.</p>';
             return;
@@ -653,7 +653,7 @@ const app = {
     renderLocationDetail(city) {
         document.getElementById('loc-title').textContent = city;
         document.getElementById('loc-desc').textContent = `Información general y estado de alertas para la ubicación de ${city}.`;
-        
+
         const container = document.getElementById('loc-incidents');
         container.innerHTML = '';
 
@@ -681,19 +681,19 @@ const app = {
         const city = document.getElementById('loc-title').textContent;
         const subs = this.currentUser.subscriptions;
         const index = subs.indexOf(city);
-        
+
         if (index > -1) {
             subs.splice(index, 1);
         } else {
             subs.push(city);
         }
-        
+
         this.renderLocationDetail(city);
     },
 
     renderIncidentDetail(id) {
         const inc = state.incidencias.find(i => i.id === id);
-        if(!inc) return;
+        if (!inc) return;
 
         const titleCard = document.getElementById('inc-detail-card');
         titleCard.className = `card title-card ${this.getColorForLevel(inc.nivel)}`;
@@ -738,7 +738,7 @@ const app = {
 
     archiveIncident(id, event) {
         event.stopPropagation();
-        if(confirm('¿Desea desestimar/archivar esta incidencia?')) {
+        if (confirm('¿Desea desestimar/archivar esta incidencia?')) {
             const index = state.incidencias.findIndex(i => i.id == id);
             if (index !== -1) {
                 state.incidencias[index].estado = 'Desestimada';
@@ -748,8 +748,8 @@ const app = {
     },
 
     openIncidentForm(id = null, event = null) {
-        if(event) event.stopPropagation();
-        
+        if (event) event.stopPropagation();
+
         const form = document.querySelector('#view-incident-form form');
         form.reset();
 
@@ -791,7 +791,7 @@ const app = {
         } else {
             newInc.id = Date.now();
             const d = new Date();
-            newInc.fecha = `${String(d.getDate()).padStart(2,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${d.getFullYear()}`;
+            newInc.fecha = `${String(d.getDate()).padStart(2, '0')}-${String(d.getMonth() + 1).padStart(2, '0')}-${d.getFullYear()}`;
             state.incidencias.unshift(newInc);
         }
 
@@ -800,7 +800,7 @@ const app = {
 
     deleteIncident(id, event) {
         event.stopPropagation();
-        if(confirm('¿Está seguro de que desea borrar esta incidencia permanentemente?')) {
+        if (confirm('¿Está seguro de que desea borrar esta incidencia permanentemente?')) {
             state.incidencias = state.incidencias.filter(i => i.id !== id);
             this.renderIncidentManageList();
         }
@@ -843,7 +843,7 @@ const app = {
     openReportForm(id = null) {
         const form = document.querySelector('#view-report-form form');
         form.reset();
-        
+
         if (id) {
             const rep = state.informes.find(i => i.id === id);
             if (rep) {
@@ -856,7 +856,7 @@ const app = {
         } else {
             document.getElementById('report-id').value = '';
         }
-        
+
         this.navigate('view-report-form');
     },
 
@@ -891,7 +891,7 @@ const app = {
     },
 
     deleteReport(id) {
-        if(confirm('¿Borrar este informe?')) {
+        if (confirm('¿Borrar este informe?')) {
             state.informes = state.informes.filter(i => i.id !== id);
             this.renderReportList();
         }
@@ -899,11 +899,11 @@ const app = {
 
     renderReportDetail(id) {
         const rep = state.informes.find(i => i.id === id);
-        if(!rep) return;
+        if (!rep) return;
 
         document.getElementById('view-rep-title').textContent = `${rep.titulo}: ${rep.tipo}`;
         document.getElementById('view-rep-meta').textContent = `${rep.ciudad} | Periodo: ${rep.inicio} a ${rep.fin} | Autor: ${rep.autor}`;
-        
+
         // Cargar texto
         document.getElementById('view-rep-text').innerHTML = `
             <p style="margin-bottom:10px;"><strong>Análisis del sistema:</strong></p>
@@ -913,9 +913,9 @@ const app = {
         // Modificar el gráfico (porcentajes generados)
         const chartObj = document.getElementById('rep-pie-chart');
         const labelsObj = document.getElementById('rep-chart-labels');
-        
+
         chartObj.style.background = `conic-gradient(#FBC582 0deg ${rep.stats.red * 3.6}deg, #FDE8A5 ${rep.stats.red * 3.6}deg 360deg)`;
-        
+
         labelsObj.innerHTML = `
             <span style="color: #FBC582; font-size: 14px; font-weight:bold; display:block; margin-bottom:5px;">${rep.stats.red}% - Nivel Emergencia (Naranja)</span>
             <span style="color: #FDE8A5; font-size: 14px; font-weight:bold; display:block; margin-bottom:5px; background:rgba(0,0,0,0.4); padding:2px; border-radius:4px;">${rep.stats.yellow}% - Nivel Alerta (Amarillo)</span>
@@ -925,10 +925,10 @@ const app = {
     populateSelects() {
         const repLoc = document.getElementById('report-loc');
         const incLoc = document.getElementById('inc-loc');
-        
+
         let options = state.ciudades.map(c => `<option value="${c}">${c}</option>`).join('');
-        if(repLoc) repLoc.innerHTML = options;
-        if(incLoc) incLoc.innerHTML = options;
+        if (repLoc) repLoc.innerHTML = options;
+        if (incLoc) incLoc.innerHTML = options;
     }
 };
 

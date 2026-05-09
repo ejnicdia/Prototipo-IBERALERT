@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- IU-0001: Login -->
@@ -24,7 +26,7 @@
                     <img src="icono.png" alt="IberAlert Logo" class="app-logo-large">
                 </div>
             </div>
-            
+
             <div class="login-box">
                 <h2 data-i18n="login_title">Iniciar sesión</h2>
                 <button class="btn-clave" onclick="app.openClaveForm()">
@@ -34,13 +36,13 @@
                     </div>
                     <span data-i18n="login_btn_clave">Acceder con Cl@ve</span>
                 </button>
-                
+
                 <ul class="login-options">
                     <li data-i18n="login_opt_1">DNIe/Certificado electrónico</li>
                     <li data-i18n="login_opt_2">Cl@ve móvil o Cl@ve permanente</li>
                     <li data-i18n="login_opt_3">Ciudadanos UE</li>
                 </ul>
-                
+
                 <div class="language-selector">
                     <select id="lang-select" onchange="app.changeLanguage(this.value)">
                         <option value="es">Español</option>
@@ -49,13 +51,14 @@
                         <option value="gl">Gallego</option>
                     </select>
                 </div>
-                
+
                 <div class="terms">
                     <input type="checkbox" id="terms" checked>
-                    <label for="terms" data-i18n="login_terms">He leído y estoy de acuerdo con los <a href="#">Términos y la Política de Privacidad</a></label>
+                    <label for="terms" data-i18n="login_terms">He leído y estoy de acuerdo con los <a href="#">Términos
+                            y la Política de Privacidad</a></label>
                 </div>
             </div>
-            
+
             <div class="login-footer" data-i18n="login_footer">
                 Todos los derechos reservados &copy;
             </div>
@@ -80,7 +83,8 @@
                     <div id="login-error" class="error-msg"></div>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-dark" data-i18n="btn_access">Acceder</button>
-                        <button type="button" class="btn btn-outline" onclick="app.closeClaveForm()" data-i18n="btn_cancel">Cancelar</button>
+                        <button type="button" class="btn btn-outline" onclick="app.closeClaveForm()"
+                            data-i18n="btn_cancel">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -89,7 +93,7 @@
 
     <!-- Main App Container -->
     <div id="app-container" style="display: none;">
-        
+
         <!-- Sidebar -->
         <aside id="sidebar" class="sidebar">
             <div class="sidebar-header">
@@ -100,20 +104,31 @@
                 </div>
             </div>
             <nav class="sidebar-nav">
-                <a class="sidebar-link" onclick="app.navigate('view-dashboard')"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Inicio</span></a>
-                <a class="sidebar-link" onclick="app.navigate('view-subscriptions')"><i class="fa-solid fa-book-heart"></i><i class="fa-solid fa-book"></i> <span data-i18n="nav_subs">Zonas Suscritas</span></a>
-                
+                <a class="sidebar-link" onclick="app.navigate('view-dashboard')"><i class="fa-solid fa-house"></i> <span
+                        data-i18n="nav_home">Inicio</span></a>
+                <a class="sidebar-link" onclick="app.navigate('view-subscriptions')"><i
+                        class="fa-solid fa-book-heart"></i><i class="fa-solid fa-book"></i> <span
+                        data-i18n="nav_subs">Zonas Suscritas</span></a>
+
                 <!-- Opciones de Autoridad -->
                 <div class="admin-only">
-                    <a class="sidebar-link" onclick="app.navigate('view-report-list')"><i class="fa-solid fa-file-lines"></i> <span data-i18n="nav_reports">Informes</span></a>
-                    <a class="sidebar-link" onclick="app.navigate('view-incident-list')"><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="nav_incidents">Gestión de Incidencias</span></a>
-                    <a class="sidebar-link" onclick="app.navigate('view-control-panel')"><i class="fa-solid fa-gauge"></i> <span data-i18n="nav_control">Panel de Control</span></a>
+                    <a class="sidebar-link" onclick="app.navigate('view-report-list')"><i
+                            class="fa-solid fa-file-lines"></i> <span data-i18n="nav_reports">Informes</span></a>
+                    <a class="sidebar-link" onclick="app.navigate('view-incident-list')"><i
+                            class="fa-solid fa-clipboard-list"></i> <span data-i18n="nav_incidents">Gestión de
+                            Incidencias</span></a>
+                    <a class="sidebar-link" onclick="app.navigate('view-control-panel')"><i
+                            class="fa-solid fa-gauge"></i> <span data-i18n="nav_control">Panel de Control</span></a>
                 </div>
-                
-                <a class="sidebar-link" onclick="app.navigate('view-settings')"><i class="fa-solid fa-gear"></i> <span data-i18n="nav_settings">Ajustes</span></a>
-                <a class="sidebar-link" onclick="app.navigate('view-help')"><i class="fa-solid fa-circle-question"></i> <span data-i18n="nav_help">Ayuda</span></a>
-                <a class="sidebar-link" onclick="app.navigate('view-contact')"><i class="fa-solid fa-address-book"></i> <span data-i18n="nav_contact">Contacto</span></a>
-                <a class="sidebar-link" onclick="app.navigate('view-privacy')"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="nav_privacy">Política de Privacidad</span></a>
+
+                <a class="sidebar-link" onclick="app.navigate('view-settings')"><i class="fa-solid fa-gear"></i> <span
+                        data-i18n="nav_settings">Ajustes</span></a>
+                <a class="sidebar-link" onclick="app.navigate('view-help')"><i class="fa-solid fa-circle-question"></i>
+                    <span data-i18n="nav_help">Ayuda</span></a>
+                <a class="sidebar-link" onclick="app.navigate('view-contact')"><i class="fa-solid fa-address-book"></i>
+                    <span data-i18n="nav_contact">Contacto</span></a>
+                <a class="sidebar-link" onclick="app.navigate('view-privacy')"><i class="fa-solid fa-shield-halved"></i>
+                    <span data-i18n="nav_privacy">Política de Privacidad</span></a>
             </nav>
         </aside>
 
@@ -127,10 +142,12 @@
                 <div class="search-nav-area">
                     <div class="search-bar">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="global-search" placeholder="Buscar ubicaciones..." data-i18n-placeholder="search_placeholder">
+                        <input type="text" id="global-search" placeholder="Buscar ubicaciones..."
+                            data-i18n-placeholder="search_placeholder">
                     </div>
                     <div class="nav-icons">
-                        <i class="fa-solid fa-circle-user profile-icon" onclick="alert('Usuario actual: ' + app.currentUser.username)"></i>
+                        <i class="fa-solid fa-circle-user profile-icon"
+                            onclick="alert('Usuario actual: ' + app.currentUser.username)"></i>
                         <i class="fa-solid fa-bars menu-icon" onclick="app.toggleSidebar()"></i>
                     </div>
                 </div>
@@ -138,10 +155,10 @@
 
             <!-- Main Content Area -->
             <main id="main-content">
-                
+
                 <!-- IU-0002: Dashboard -->
                 <section id="view-dashboard" class="app-view">
-                    <h1 class="page-title" data-i18n="title_dashboard">Incidencias Recientes (Suscripciones)</h1>
+                    <h1 class="page-title" data-i18n="title_dashboard">Incidencias Recientes</h1>
                     <div id="dashboard-cards" class="cards-grid">
                         <!-- Generado por JS -->
                     </div>
@@ -166,19 +183,20 @@
 
                 <!-- IU-0004: Detalles de zona -->
                 <section id="view-location-detail" class="app-view">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h1 class="page-title location-title" id="loc-title" style="margin-bottom:0;"></h1>
                         <button id="btn-subscribe" class="btn btn-outline" onclick="app.toggleSubscription()">
                             <!-- Llenado por JS, con i18n manejado en JS -->
                         </button>
                     </div>
                     <p class="location-desc" id="loc-desc"></p>
-                    
+
                     <h2 class="section-subtitle" data-i18n="subtitle_loc_incidents">Incidencias en esta ubicación</h2>
                     <div id="loc-incidents" class="cards-grid">
                         <!-- Generado por JS -->
                     </div>
-                    
+
                     <div class="back-link-container">
                         <span class="back-link" onclick="app.goBack()" data-i18n="btn_back">Volver</span>
                         <i class="fa-regular fa-comment-dots chat-icon"></i>
@@ -193,9 +211,12 @@
                     </div>
                     <div class="incident-desc">
                         <p id="inc-detail-desc"></p>
-                        <p><strong data-i18n="lbl_affected_loc">Ubicación afectada:</strong> <span id="inc-detail-loc"></span></p>
-                        <p><strong data-i18n="lbl_recommendations">Recomendaciones:</strong> <span id="inc-detail-rec"></span></p>
-                        <p><strong data-i18n="lbl_emission_date">Fecha de emisión:</strong> <span id="inc-detail-date"></span></p>
+                        <p><strong data-i18n="lbl_affected_loc">Ubicación afectada:</strong> <span
+                                id="inc-detail-loc"></span></p>
+                        <p><strong data-i18n="lbl_recommendations">Recomendaciones:</strong> <span
+                                id="inc-detail-rec"></span></p>
+                        <p><strong data-i18n="lbl_emission_date">Fecha de emisión:</strong> <span
+                                id="inc-detail-date"></span></p>
                     </div>
                     <div class="back-link" onclick="app.goBack()" data-i18n="btn_back">Volver</div>
                 </section>
@@ -207,7 +228,8 @@
                         <!-- Generado por JS -->
                     </div>
                     <div class="floating-action" style="margin-top:20px;">
-                        <button class="btn btn-dark" onclick="app.openReportForm()" data-i18n="btn_create_report">Crear Informe</button>
+                        <button class="btn btn-dark" onclick="app.openReportForm()" data-i18n="btn_create_report">Crear
+                            Informe</button>
                     </div>
                 </section>
 
@@ -242,7 +264,8 @@
                         </div>
 
                         <div class="form-actions space-between">
-                            <span class="back-link form-back" onclick="app.navigate('view-report-list')" data-i18n="btn_cancel">Cancelar</span>
+                            <span class="back-link form-back" onclick="app.navigate('view-report-list')"
+                                data-i18n="btn_cancel">Cancelar</span>
                             <div>
                                 <button type="submit" class="btn btn-dark" data-i18n="btn_save">Guardar</button>
                             </div>
@@ -252,12 +275,14 @@
 
                 <!-- NUEVA VISTA: Detalle del Informe (Ojo) -->
                 <section id="view-report-detail" class="app-view">
-                    <div class="report-header-banner card-blue" style="padding:20px; border-radius:10px; margin-bottom:20px;">
+                    <div class="report-header-banner card-blue"
+                        style="padding:20px; border-radius:10px; margin-bottom:20px;">
                         <h2 id="view-rep-title" style="margin-bottom: 5px;">Título del Informe</h2>
                         <p id="view-rep-meta" style="color:var(--text-muted);"></p>
                     </div>
-                    
-                    <div class="report-content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+                    <div class="report-content-grid"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                         <!-- Bloque Texto/Detalles -->
                         <div class="app-form">
                             <h3 data-i18n="lbl_report_details">Detalles del Análisis</h3>
@@ -265,7 +290,7 @@
                                 <!-- Rellenado por JS dinámicamente -->
                             </div>
                         </div>
-                        
+
                         <!-- Bloque Gráfico -->
                         <div class="app-form" style="display:flex; flex-direction:column; align-items:center;">
                             <h3 id="view-rep-chart-title">Estadísticas</h3>
@@ -278,7 +303,8 @@
                         </div>
                     </div>
 
-                    <div class="back-link" onclick="app.goBack()" style="margin-top: 20px;" data-i18n="btn_back">Volver</div>
+                    <div class="back-link" onclick="app.goBack()" style="margin-top: 20px;" data-i18n="btn_back">Volver
+                    </div>
                 </section>
 
                 <!-- IU-0008: Panel de Control Meteorológico -->
@@ -304,10 +330,12 @@
                             <label data-i18n="lbl_last_conn">Última conexión:</label>
                             <input type="text" class="rounded-input date-input" id="last-conn-date" disabled>
                         </div>
-                        
+
                         <div class="form-actions center-actions">
-                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_saved'))" data-i18n="btn_save">Guardar</button>
-                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_synced'))" data-i18n="btn_sync">Sincronizar</button>
+                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_saved'))"
+                                data-i18n="btn_save">Guardar</button>
+                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_synced'))"
+                                data-i18n="btn_sync">Sincronizar</button>
                         </div>
                     </form>
                 </section>
@@ -318,12 +346,14 @@
                     <div id="incident-manage-list" class="cards-grid">
                         <!-- Generado por JS -->
                     </div>
-                    <div class="back-link" style="margin-top:20px; cursor:pointer;" onclick="app.openIncidentForm()" data-i18n="btn_create_incident">Crear Incidencia</div>
+                    <div class="back-link" style="margin-top:20px; cursor:pointer;" onclick="app.openIncidentForm()"
+                        data-i18n="btn_create_incident">Crear Incidencia</div>
                 </section>
 
                 <!-- IU-0010: Formulario de Incidencias -->
                 <section id="view-incident-form" class="app-view">
-                    <h1 class="page-title" id="incident-form-title" data-i18n="title_create_incident">Crear Incidencia</h1>
+                    <h1 class="page-title" id="incident-form-title" data-i18n="title_create_incident">Crear Incidencia
+                    </h1>
                     <form class="app-form" onsubmit="event.preventDefault(); app.saveIncident();">
                         <input type="hidden" id="inc-id">
                         <div class="form-group">
@@ -350,23 +380,26 @@
                         <div class="form-group">
                             <label data-i18n="lbl_inc_type">Tipo de Incidencia:</label>
                             <select id="inc-level" class="rounded-input">
-                                <option value="Emergencia" data-i18n="opt_emergency">Emergencia (Peligro Extremo / Naranja)</option>
+                                <option value="Emergencia" data-i18n="opt_emergency">Emergencia (Peligro Extremo /
+                                    Naranja)</option>
                                 <option value="Alerta" data-i18n="opt_alert">Alerta (Precaución / Amarillo)</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label data-i18n="lbl_rec_input">Recomendaciones (Instrucciones):</label>
-                            <textarea id="inc-rec" class="rounded-input" data-i18n-placeholder="placeholder_write_here"></textarea>
+                            <textarea id="inc-rec" class="rounded-input"
+                                data-i18n-placeholder="placeholder_write_here"></textarea>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-dark" data-i18n="btn_save">Guardar</button>
-                            <button type="button" class="btn btn-outline" onclick="app.navigate('view-incident-list')" data-i18n="btn_cancel">Cancelar</button>
+                            <button type="button" class="btn btn-outline" onclick="app.navigate('view-incident-list')"
+                                data-i18n="btn_cancel">Cancelar</button>
                         </div>
                     </form>
                 </section>
 
                 <!-- Vistas Inventadas Adicionales -->
-                
+
                 <!-- Ajustes -->
                 <section id="view-settings" class="app-view">
                     <h1 class="page-title" data-i18n="nav_settings">Ajustes Generales</h1>
@@ -388,7 +421,8 @@
                             <input type="checkbox">
                         </div>
                         <div class="form-actions center-actions">
-                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_saved'))" data-i18n="btn_save">Guardar</button>
+                            <button type="button" class="btn btn-dark" onclick="alert(app.t('alert_saved'))"
+                                data-i18n="btn_save">Guardar</button>
                         </div>
                     </form>
                 </section>
@@ -398,18 +432,25 @@
                     <h1 class="page-title" data-i18n="nav_help">Ayuda y FAQ</h1>
                     <div class="app-form">
                         <h3 data-i18n="help_q1">¿Qué significan los tipos de incidencia?</h3>
-                        <p><strong data-i18n="help_a1_strong1">Emergencia (Naranja):</strong> <span data-i18n="help_a1_desc1">Situación de peligro extremo. Permanezca a salvo y siga las instrucciones.</span><br>
-                           <strong data-i18n="help_a1_strong2">Alerta (Amarillo):</strong> <span data-i18n="help_a1_desc2">Situación de riesgo moderado. Esté atento a nuevas actualizaciones.</span></p>
+                        <p><strong data-i18n="help_a1_strong1">Emergencia (Naranja):</strong> <span
+                                data-i18n="help_a1_desc1">Situación de peligro extremo. Permanezca a salvo y siga las
+                                instrucciones.</span><br>
+                            <strong data-i18n="help_a1_strong2">Alerta (Amarillo):</strong> <span
+                                data-i18n="help_a1_desc2">Situación de riesgo moderado. Esté atento a nuevas
+                                actualizaciones.</span>
+                        </p>
                         <br>
                         <h3 data-i18n="help_q2">¿Cómo me suscribo a una zona?</h3>
-                        <p data-i18n="help_a2">Busca una ubicación en la barra superior y pulsa el botón "Suscribirse" para ver sus avisos en tu Inicio.</p>
+                        <p data-i18n="help_a2">Busca una ubicación en la barra superior y pulsa el botón "Suscribirse"
+                            para ver sus avisos en tu Inicio.</p>
                     </div>
                 </section>
 
                 <!-- Contacto -->
                 <section id="view-contact" class="app-view">
                     <h1 class="page-title" data-i18n="nav_contact">Contacto</h1>
-                    <form class="app-form" onsubmit="event.preventDefault(); alert(app.t('alert_msg_sent')); app.navigate('view-dashboard');">
+                    <form class="app-form"
+                        onsubmit="event.preventDefault(); alert(app.t('alert_msg_sent')); app.navigate('view-dashboard');">
                         <div class="form-group">
                             <label data-i18n="lbl_subject">Asunto:</label>
                             <input type="text" class="rounded-input" required>
@@ -428,9 +469,12 @@
                 <section id="view-privacy" class="app-view">
                     <h1 class="page-title" data-i18n="nav_privacy">Política de Privacidad</h1>
                     <div class="app-form">
-                        <p data-i18n="priv_p1">Sus datos están protegidos según la ley de Protección de Datos española (LOPD). IberAlert no comparte información de ubicación precisa con terceros sin su consentimiento explícito.</p>
+                        <p data-i18n="priv_p1">Sus datos están protegidos según la ley de Protección de Datos española
+                            (LOPD). IberAlert no comparte información de ubicación precisa con terceros sin su
+                            consentimiento explícito.</p>
                         <br>
-                        <p data-i18n="priv_p2">Toda la información meteorológica se provee a efectos informativos. Los datos de identificación provienen del sistema Cl@ve del estado español.</p>
+                        <p data-i18n="priv_p2">Toda la información meteorológica se provee a efectos informativos. Los
+                            datos de identificación provienen del sistema Cl@ve del estado español.</p>
                     </div>
                 </section>
 
@@ -457,4 +501,5 @@
     <!-- Script -->
     <script src="app.js"></script>
 </body>
+
 </html>

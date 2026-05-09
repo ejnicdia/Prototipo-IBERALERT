@@ -2,7 +2,17 @@
 build/
 .gradle/
 
-*.apk
+app/build/generated/
+app/build/intermediates/
+app/build/kotlin/
+app/build/kotlinToolingMetadata/
+app/build/reports/
+app/build/snapshot/
+app/build/test-results/
+app/build/tmp/
+app/build/outputs/logs/
+
+
 *.ap_
 *.dex
 *.class

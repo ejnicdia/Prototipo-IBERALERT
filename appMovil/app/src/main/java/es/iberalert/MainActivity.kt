@@ -297,30 +297,20 @@ fun AppScaffold(
                     }
                     Spacer(modifier = Modifier.height(24.dp))
                     
-                    DrawerItem(viewModel.t("nav_home"), Icons.Default.Home) {
+                    DrawerItem(viewModel.t("nav_reports"), Icons.Default.Description) { 
                         scope.launch { drawerState.close() }
-                        navController.navigate("main") { popUpTo("main") { inclusive = true } }
+                        navController.navigate("reports_admin") 
                     }
-                    DrawerItem(viewModel.t("nav_subs"), Icons.Default.Book) {
+                    DrawerItem(viewModel.t("nav_incidents"), Icons.Default.AssignmentInd) { 
                         scope.launch { drawerState.close() }
-                        navController.navigate("subscriptions")
+                        navController.navigate("incidents_admin") 
                     }
-
-                    if (viewModel.currentUser?.role == "autoridad") {
-                        DrawerItem(viewModel.t("nav_reports"), Icons.Default.Description) { 
-                            scope.launch { drawerState.close() }
-                            navController.navigate("reports_admin") 
-                        }
-                        DrawerItem(viewModel.t("nav_incidents"), Icons.Default.AssignmentInd) { 
-                            scope.launch { drawerState.close() }
-                            navController.navigate("incidents_admin") 
-                        }
-                        DrawerItem(viewModel.t("nav_control"), Icons.Default.SettingsSuggest) { 
-                            scope.launch { drawerState.close() }
-                            navController.navigate("control_panel") 
-                        }
-                        Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    DrawerItem(viewModel.t("nav_control"), Icons.Default.SettingsSuggest) { 
+                        scope.launch { drawerState.close() }
+                        navController.navigate("control_panel") 
                     }
+                    
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
                     
                     DrawerItem(viewModel.t("nav_settings"), Icons.Default.Settings) { 
                         scope.launch { drawerState.close() }
@@ -371,15 +361,8 @@ fun AppScaffold(
                         selected = currentRoute == "main",
                         onClick = { navController.navigate("main") }
                     )
-                    if (viewModel.currentUser?.role == "autoridad") {
-                        NavigationBarItem(
-                            icon = { Icon(Icons.Default.MeetingRoom, contentDescription = null) },
-                            selected = currentRoute == "incidents_admin",
-                            onClick = { navController.navigate("incidents_admin") }
-                        )
-                    }
                     NavigationBarItem(
-                        icon = { Icon(Icons.Default.ExitToApp, contentDescription = null) },
+                        icon = { Icon(Icons.Default.MeetingRoom, contentDescription = null) },
                         selected = false,
                         onClick = { (context as? Activity)?.finishAndRemoveTask() }
                     )
@@ -409,7 +392,7 @@ fun CustomTopBar(onMenuClick: () -> Unit, viewModel: AppViewModel, navController
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Cloud, null, modifier = Modifier.size(32.dp))
+            Image(painter = painterResource(id = R.drawable.ic_launcher), contentDescription = null, modifier = Modifier.size(32.dp))
             Spacer(modifier = Modifier.width(8.dp))
             Text("IberAlert", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.DarkGray)
         }
@@ -463,7 +446,7 @@ fun LoginScreen(navController: NavController, viewModel: AppViewModel) {
     ) {
         Text("IberAlert", fontSize = 48.sp, fontWeight = FontWeight.Bold, color = Color.Black)
         Spacer(modifier = Modifier.height(16.dp))
-        Icon(Icons.Default.Cloud, null, modifier = Modifier.size(100.dp), tint = IberBlueHeader)
+        Image(painter = painterResource(id = R.drawable.ic_launcher), contentDescription = null, modifier = Modifier.size(100.dp))
         Spacer(modifier = Modifier.height(48.dp))
         Text(viewModel.t("login_title"), fontSize = 24.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(24.dp))
@@ -767,21 +750,39 @@ fun ReportDetailScreen(navController: NavController, viewModel: AppViewModel, id
                 }
                 
                 Spacer(modifier = Modifier.height(24.dp))
-                Text("Fecha de Inicio:", fontWeight = FontWeight.Bold)
-                OutlinedTextField(rep.inicio, {}, Modifier.fillMaxWidth(), readOnly = true)
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Text("Estadísticas del Informe:", fontWeight = FontWeight.Bold)
+                    Text("Total: 100%", fontSize = 12.sp, color = Color.Gray)
+                }
+                Spacer(modifier = Modifier.height(12.dp))
                 
-                Text("Fecha de Fin:", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
-                OutlinedTextField(rep.fin, {}, Modifier.fillMaxWidth(), readOnly = true)
+                // Simulated Chart
+                Row(modifier = Modifier.fillMaxWidth().height(150.dp).padding(horizontal = 16.dp), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceEvenly) {
+                    rep.stats.forEach { (label, value) ->
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            val color = if (label == "red") IberOrange else IberYellow
+                            Box(modifier = Modifier.width(40.dp).height((value * 1.2).dp).background(color, RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp)))
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(if (label == "red") "Emerg." else "Alerta", fontSize = 10.sp)
+                            Text("$value%", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                    // Additional random data bars
+                    repeat(2) { idx ->
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Box(modifier = Modifier.width(40.dp).height((20 + idx * 15).dp).background(IberInfoBlue, RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp)))
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text("Otros", fontSize = 10.sp)
+                            Text("${20 + idx * 15}%", fontSize = 10.sp)
+                        }
+                    }
+                }
                 
-                Text("Tipo de Reporte:", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
-                OutlinedTextField(rep.tipo, {}, Modifier.fillMaxWidth(), readOnly = true)
-                
-                Text("Ubicaciones:", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
-                OutlinedTextField(rep.ciudad, {}, Modifier.fillMaxWidth(), readOnly = true)
-                
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
                 Text("Detalles del Análisis:", fontWeight = FontWeight.Bold)
-                Text(rep.desc)
+                Card(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5))) {
+                    Text(rep.desc, modifier = Modifier.padding(16.dp), fontSize = 14.sp)
+                }
                 
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
