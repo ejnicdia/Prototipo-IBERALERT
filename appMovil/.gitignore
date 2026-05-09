@@ -1,7 +1,7 @@
 # Android
 build/
 .gradle/
-app/build/
+# app/build/
 *.apk
 *.ap_
 *.dex
