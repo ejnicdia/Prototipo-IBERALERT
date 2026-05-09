@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IberAlert</string>
+    <string name="btn_access">Acceder</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="clave_desc">Por favor, ingrese los datos del usuario</string>
+    <string name="clave_pass">Contraseña:</string>
+    <string name="clave_title">Identificación</string>
+    <string name="clave_user">Usuario:</string>
+    <string name="login_btn_clave">Acceder con Cl@ve</string>
+    <string name="login_opt_1">DNIe/Certificado electrónico</string>
+    <string name="login_opt_2">Cl@ve móvil o Cl@ve permanente</string>
+    <string name="login_opt_3">Ciudadanos UE</string>
+    <string name="login_title">Iniciar sesión</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_incidents">Incidencias</string>
+    <string name="nav_reports">Informes</string>
+    <string name="nav_subs">Zonas Suscritas</string>
+    <style name="Theme.IberAlert" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>
